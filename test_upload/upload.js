@@ -1,0 +1,10 @@
+var f = document.createElement("form");
+f.id="form-upload";
+f.style.display="block";
+f.enctype="multipart/form-data";
+input = document.createElement("input");
+input.type = "file";
+input.name = "file";
+f.appendChild(input);
+body = document.getElementsByTagName("body")[0];
+body.insertBefore(f, body.firstChild);
