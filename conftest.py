@@ -1,6 +1,7 @@
 import pytest
 from selenium import webdriver
-
+from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.support.events import EventFiringWebDriver
 
 def pytest_addoption(parser):
     parser.addoption(
@@ -12,7 +13,7 @@ def pytest_addoption(parser):
     parser.addoption(
         "--url",
         action="store",
-        default="http://192.168.0.103",
+        default="https://192.168.1.105",
         help="Insert yout URL"
     )
     parser.addoption(
@@ -23,15 +24,52 @@ def pytest_addoption(parser):
     )
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def browser(request):
     param = request.config.getoption("--b")
     if param == "chrome":
-        wd = webdriver.Chrome()
+        wd = EventFiringWebDriver(webdriver.Chrome(), test1())
+        logging.info("CHROME SELECTED")
     elif param == "firefox":
-        wd = webdriver.Firefox()
+        logging.info("FIREFOX SELECTED")
+        opt = Options()
+        opt.log.level="trace"
+        wd = EventFiringWebDriver(webdriver.Firefox(options=opt), test1())
     else:
+        logging.info("WRONG")
         raise ("Browser is not supported")
     wd.implicitly_wait(5)
     wd.get(request.config.getoption("--url") + request.config.getoption("--path"))
+    request.addfinalizer(wd.quit)
     return wd
+
+
+
+## -------------------logging part------------------- ##
+from selenium.webdriver.support.events import AbstractEventListener
+import logging
+
+logging.getLogger('test')
+logging.basicConfig(filename='example.log', level=logging.DEBUG)
+
+
+class test1(AbstractEventListener):
+    
+
+    def before_find(self, by, value, driver):
+        logging.info(msg=(by, value))
+
+    def on_exception(self, exception, driver):
+        logging.error(exception)
+    
+    def after_click(self, element, driver):
+        logging.info("el " + element + " was clicked")
+
+    def after_find(self, by, value, driver):
+        logging.info(by + " founded")
+
+    def on_exception(self, exception, driver):
+        logging.error(exception)
+
+    def before_quit(self, driver):
+        logging.info("test is done")
