@@ -17,7 +17,5 @@ class AdminPanel(DefaultPage):
         file_path = os.path.join(path_dir, "../test_upload/sel.png")
         self._click(Admin.plus_button, 1)
         self.browser.execute_script(open("./upload.js").read())
-        self._click(Admin.upload_button, 1)
-        ActionChains(self.browser).send_keys(Keys.ESCAPE).perform()
         time.sleep(5)
         self._input(Admin.input_file, file_path)

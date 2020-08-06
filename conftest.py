@@ -53,7 +53,7 @@ logging.getLogger('test')
 logging.basicConfig(filename='example.log', level=logging.DEBUG)
 
 
-class test1(AbstractEventListener):
+class logger_listener(AbstractEventListener):
     
 
     def before_find(self, by, value, driver):

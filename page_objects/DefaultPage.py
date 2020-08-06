@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from ..locators.Common import Common
 from .UserLogin import UserLogin
-
+from ..conftest import logger_listener
 
 class DefaultPage:
 

@@ -3,7 +3,6 @@ from .ProductPage import ProductPage
 from .UserPage import UserPage
 from ..locators import Main, Common
 
-
 class MainPage(DefaultPage):
 
     def click_featured_products(self, number):
