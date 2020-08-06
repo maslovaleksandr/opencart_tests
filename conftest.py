@@ -2,6 +2,9 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.support.events import EventFiringWebDriver
+from selenium.webdriver.support.events import AbstractEventListener
+import logging
+
 
 def pytest_addoption(parser):
     parser.addoption(
@@ -46,8 +49,7 @@ def browser(request):
 
 
 ## -------------------logging part------------------- ##
-from selenium.webdriver.support.events import AbstractEventListener
-import logging
+
 
 logging.getLogger('test')
 logging.basicConfig(filename='example.log', level=logging.DEBUG)
