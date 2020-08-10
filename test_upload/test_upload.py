@@ -6,4 +6,4 @@ def test_login_admin(browser):
     AdminPanel(browser)\
         .go_to_downloads()\
         .add_new_image()
-        
+    

@@ -6,7 +6,6 @@ from ..locators import Main, Common
 class MainPage(DefaultPage):
 
     def click_featured_products(self, number):
-        number = number-1
         self._click(Main.featured.elements, index=number)
         return ProductPage(self.browser)
 

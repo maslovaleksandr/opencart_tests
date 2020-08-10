@@ -4,19 +4,20 @@ from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.support.events import EventFiringWebDriver
 from selenium.webdriver.support.events import AbstractEventListener
 import logging
+from browsermobproxy import Server
 
 
 def pytest_addoption(parser):
     parser.addoption(
         "--b",
         action="store",
-        default="firefox",
+        default="chrome",
         help="Chose your browser"
     )
     parser.addoption(
         "--url",
         action="store",
-        default="https://192.168.1.105",
+        default="https://localhost",
         help="Insert yout URL"
     )
     parser.addoption(
@@ -31,13 +32,14 @@ def pytest_addoption(parser):
 def browser(request):
     param = request.config.getoption("--b")
     if param == "chrome":
-        wd = EventFiringWebDriver(webdriver.Chrome(), test1())
+        wd = EventFiringWebDriver(webdriver.Chrome(), logger_listener())
         logging.info("CHROME SELECTED")
     elif param == "firefox":
         logging.info("FIREFOX SELECTED")
         opt = Options()
         opt.log.level="trace"
-        wd = EventFiringWebDriver(webdriver.Firefox(options=opt), test1())
+        wd = EventFiringWebDriver(webdriver.Firefox(options=opt), logger_listener()
+        )
     else:
         logging.info("WRONG")
         raise ("Browser is not supported")
@@ -52,7 +54,7 @@ def browser(request):
 
 
 logging.getLogger('test')
-logging.basicConfig(filename='example.log', level=logging.DEBUG)
+logging.basicConfig(filename='test.log', level=logging.DEBUG)
 
 
 class logger_listener(AbstractEventListener):
@@ -65,7 +67,7 @@ class logger_listener(AbstractEventListener):
         logging.error(exception)
     
     def after_click(self, element, driver):
-        logging.info("el " + element + " was clicked")
+        logging.info("el clicked successfully")
 
     def after_find(self, by, value, driver):
         logging.info(by + " founded")
