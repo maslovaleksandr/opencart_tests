@@ -1,10 +1,16 @@
+import logging
+from os import path
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 from ..locators.Common import Common
 from .UserLogin import UserLogin
 from ..conftest import logger_listener
+import os
+import time
 
 class DefaultPage:
 
@@ -35,3 +41,14 @@ class DefaultPage:
     def is_visible(self, selector, index, timeout = 3):
         return WebDriverWait(self.browser, timeout) \
             .until(EC.invisibility_of_element(self.__elements(selector, index)))
+
+    def make_screenshot(self, filename):
+        self.browser.save_screenshot(str(filename))
+        logging.info("Screenshot path: " + os.path.abspath(filename))
+        return os.path.abspath(filename)
+
+
+    def click_all_elements(self, elements, timeout=1):
+        for el in elements:
+            self._click(el)
+            time.sleep(timeout)
