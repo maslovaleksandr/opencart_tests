@@ -10,3 +10,4 @@ def test_back_to_main_page(browser):
 
 def test_drop_down_menu(browser):
     MainPage(browser).check_drop_down_menu()
+
