@@ -3,3 +3,4 @@ from .Main import Main
 from .Product import Product
 from .User import User
 from .Admin import Admin
+from .Catalog import Catalog

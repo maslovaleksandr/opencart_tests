@@ -6,9 +6,9 @@ class Catalog:
 
     class Buttons:
         button_group = {'css': '.button-group'}
-        add_to_cart_button = {'css': button_group + ' [class="fa fa-shopping-cart"]'}
-        add_to_wish_list_button = {'css': button_group + ' [class="fa fa-heart"]'}
-        compare_product_button = {'css': button_group + '[class="fa fa-exchange"]'} 
+        add_to_cart_button = {'css': button_group['css'] + ' [class="fa fa-shopping-cart"]'}
+        add_to_wish_list_button = {'css': button_group['css'] + ' [class="fa fa-heart"]'}
+        compare_product_button = {'css': button_group['css'] + '[class="fa fa-exchange"]'} 
 
     class Navigation:
         list_view = {'css': '[data-original-title="List"]'}

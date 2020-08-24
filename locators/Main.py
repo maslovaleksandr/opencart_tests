@@ -10,3 +10,4 @@ class Main:
         components = {'css': 'li.dropdown:nth-child(3) > a:nth-child(1)'}
         mp3_players = {'css': 'li.dropdown:nth-child(8) > a:nth-child(1)'}
         elements = [desktop, laptop_and_notebooks, components, mp3_players]
+        phones_and_pda = {'css': '#menu > div.collapse.navbar-collapse.navbar-ex1-collapse > ul > li:nth-child(6) > a'}
